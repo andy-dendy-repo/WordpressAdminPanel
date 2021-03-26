@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using WordpressClient.Data;
 using WordpressClient.Services.Interfaces;
 
@@ -15,13 +13,18 @@ namespace WordpressClient.Services
         {
             AdminDbContext context = new AdminDbContext();
 
-            var foundUser = context.WpUsers.FirstOrDefault(x=>x.UserLogin==username);
+            var foundUser = context.WpUsers.FirstOrDefault(x => x.UserLogin == username);
 
-            string foundUserHash = foundUser.UserPass;
+            if (foundUser != null)
+            {
+                string foundUserHash = foundUser.UserPass;
 
-            string hash = Crypt(password, foundUserHash);
+                string hash = Crypt(password, foundUserHash);
 
-            return foundUserHash == hash;
+                return foundUserHash == hash;
+            }
+            else
+                return false;
         }
 
         private string Crypt(string password, string setting)

@@ -19,11 +19,17 @@ namespace AdminPanel
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            GetUnityContainer().Resolve<Login>().Show();
+        }
+
+        private IUnityContainer GetUnityContainer()
+        {
             IUnityContainer container = new UnityContainer();
 
             container.RegisterType<IAuthService, AuthService>();
 
-            container.Resolve<Login>().Show();
+            return container;
         }
     }
 }

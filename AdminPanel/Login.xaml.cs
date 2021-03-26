@@ -32,11 +32,11 @@ namespace AdminPanel
         {
             if(_authService.SignIn(tbUsename.Text, tbPassword.Text))
             {
-
+                _container.Resolve<MainWindow>().Show();
             }
             else
             {
-
+                MessageBox.Show("Incorrect credentials!");
             }
         }
     }

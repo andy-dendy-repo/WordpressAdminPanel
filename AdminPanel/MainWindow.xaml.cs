@@ -12,7 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Unity;
 using WordpressClient;
+using WordpressClient.Services.Interfaces;
 
 namespace AdminPanel
 {
@@ -21,9 +23,11 @@ namespace AdminPanel
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        IUnityContainer _container;
+        public MainWindow(IUnityContainer container, IAuthService authService)
         {
             InitializeComponent();
+            _container = container;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
