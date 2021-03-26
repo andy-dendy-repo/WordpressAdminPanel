@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Unity;
+using WordpressClient.Services.Interfaces;
 
 namespace AdminPanel
 {
@@ -17,9 +19,25 @@ namespace AdminPanel
     /// </summary>
     public partial class Login : Window
     {
-        public Login()
+        private IAuthService _authService;
+        private IUnityContainer _container;
+        public Login(IUnityContainer container, IAuthService authService)
         {
             InitializeComponent();
+            _authService = authService;
+            _container = container;
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            if(_authService.SignIn(tbUsename.Text, tbPassword.Text))
+            {
+
+            }
+            else
+            {
+
+            }
         }
     }
 }
