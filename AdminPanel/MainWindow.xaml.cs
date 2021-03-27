@@ -24,7 +24,7 @@ namespace AdminPanel
     public partial class MainWindow : Window
     {
         IUnityContainer _container;
-        public MainWindow(IUnityContainer container, IAuthService authService)
+        public MainWindow(IUnityContainer container)
         {
             InitializeComponent();
             _container = container;
@@ -32,9 +32,7 @@ namespace AdminPanel
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Test test = new Test();
-
-            var a = test.GetPass();
+            
         }
     }
 }

@@ -9,6 +9,7 @@ namespace WordpressClient.Services
 {
     public class AuthService : IAuthService
     {
+        private const string itoa64 = "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         public bool SignIn(string username, string password)
         {
             AdminDbContext context = new AdminDbContext();
@@ -29,7 +30,7 @@ namespace WordpressClient.Services
 
         private string Crypt(string password, string setting)
         {
-            string itoa64 = "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
 
             string output = "*0";
 
@@ -53,23 +54,72 @@ namespace WordpressClient.Services
             if (salt.Length != 8)
                 return output;
 
-            string hash = GetHash(salt + password);
+            var hash = GetHash(
+                GetByteArraysAppended(
+                    Encoding.UTF7.GetBytes(salt),
+                    Encoding.UTF7.GetBytes(password)
+                    ));
+            
+            do
+            {
+                hash = GetHash(
+                    GetByteArraysAppended(
+                        hash, 
+                        Encoding.UTF7.GetBytes(password)
+                        ));
+            }
+            while (--count!=0);
+
+            output = setting.Substring(0, 12);
+
+            output += encode64(hash, 16);
+
+            return output;
+        }
+
+        private string encode64(byte [] input, int count)
+        {
+            string output = "";
+            int i = 0;
 
             do
             {
-                hash = GetHash(hash + password);
-            }
-            while (--count != 0);
+                Int32 value = input[i++];
+                output += itoa64[value & 0x3f];
 
-            return setting;
+                if (i < count)
+                    value |= input[i] << 8;
+                output += itoa64[(value >> 6) & 0x3f];
+                if (i++ >= count)
+                    break;
+                if (i < count)
+                    value |= input[i] << 16;
+                output += itoa64[(value >> 12) & 0x3f];
+                if (i++ >= count)
+                    break;
+                output += itoa64[(value >> 18) & 0x3f];
+            } while (i < count);
+
+            return output;
         }
 
-        private string GetHash(string input)
-        {
-            var md5 = MD5.Create();
-            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
 
-            return Convert.ToBase64String(hash);
+
+        private byte[] GetByteArraysAppended(byte[] partOne, byte[] partTwo)
+        {
+            var parts = partOne.ToList();
+            parts.AddRange(partTwo);
+            var result = parts.ToArray();
+
+            return result;
+        }
+
+        private byte[] GetHash(byte [] bytesToHash)
+        {
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            var hash = md5.ComputeHash(bytesToHash);
+
+            return hash;
         }
     }
 }
