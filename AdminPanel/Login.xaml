@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdminPanel"
         mc:Ignorable="d"
-        Title="Login" Height="450" Width="800">
+        Title="Login" Width="170" Height="177">
     <Grid>
-        <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Center" Height="29" Margin="0,281,0,0" VerticalAlignment="Top" Width="98" Click="btnLogin_Click"/>
-        <Label Content="Username:" HorizontalAlignment="Left" Margin="205,83,0,0" VerticalAlignment="Top" Width="95"/>
-        <Label Content="Password:" HorizontalAlignment="Left" Margin="205,114,0,0" VerticalAlignment="Top" Width="95"/>
-        <TextBox x:Name="tbUsename" HorizontalAlignment="Left" Margin="280,87,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="169"/>
-        <TextBox x:Name="tbPassword" HorizontalAlignment="Left" Margin="280,122,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="169"/>
-
+        <StackPanel>
+            <Label Content="Username:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="95"/>
+            <TextBox x:Name="tbUsename" HorizontalAlignment="Left" Text="root" TextWrapping="Wrap" VerticalAlignment="Top" Width="169"/>
+            <Label Content="Password:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="95"/>
+            <TextBox x:Name="tbPassword" HorizontalAlignment="Left" Text="1111" TextWrapping="Wrap" VerticalAlignment="Top" Width="169"/>
+            <Button x:Name="btnLogin" Content="Login" Margin="10" Height="29" Width="98" Click="btnLogin_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

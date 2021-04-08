@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using Unity;
+using Unity.Resolution;
+using WordpressClient.Data;
 using WordpressClient.Services;
 using WordpressClient.Services.Interfaces;
 
@@ -20,14 +16,20 @@ namespace AdminPanel
         {
             base.OnStartup(e);
 
-            GetUnityContainer().Resolve<Login>().Show();
+            GetUnityContainer().Resolve<MainWindow>().Show();
         }
 
         private IUnityContainer GetUnityContainer()
         {
             IUnityContainer container = new UnityContainer();
 
+            container.RegisterType<AdminDbContext>();
+
             container.RegisterType<IAuthService, AuthService>();
+
+            container.RegisterType<IGoodsService, GoodsService>();
+
+            container.RegisterType<ICategoryService, CategoryService>();
 
             return container;
         }

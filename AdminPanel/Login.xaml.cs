@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Unity;
+using Unity.Resolution;
 using WordpressClient.Services.Interfaces;
 
 namespace AdminPanel
@@ -20,19 +21,20 @@ namespace AdminPanel
     public partial class Login : Window
     {
         private IAuthService _authService;
-        private IUnityContainer _container;
-        public Login(IUnityContainer container, IAuthService authService)
+        private IUnityContainer _unityContainer;
+        public Login(IUnityContainer container)
         {
             InitializeComponent();
-            _authService = authService;
-            _container = container;
+            _unityContainer = container;
+            _authService = container.Resolve<IAuthService>();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if(_authService.SignIn(tbUsename.Text, tbPassword.Text))
+            if (_authService.SignIn(tbUsename.Text, tbPassword.Text))
             {
-                _container.Resolve<MainWindow>().Show();
+                DialogResult = true;
+                Close();
             }
             else
             {

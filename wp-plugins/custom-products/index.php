@@ -63,3 +63,76 @@ function wp_products_init() {
 }
  
 add_action( 'init', 'wp_products_init' );
+
+class Products_Meta_Box {
+ 
+    public $_post_type;
+
+    public $_meta_box;
+
+    function __construct($pt, $mb) {
+        $this->_post_type = $pt;
+        $this->_meta_box = $mb;
+    }
+    
+    /**
+     * Set up and add the meta box.
+     */
+    public function add() {
+        add_meta_box(
+            $this->_meta_box,          // Unique ID
+            $this->_meta_box, // Box title
+            [ $this, 'html' ],   // Content callback, must be of type callable
+            $this->_post_type                  // Post type
+        );
+    }
+ 
+ 
+    /**
+     * Save the meta box selections.
+     *
+     * @param int $post_id  The post ID.
+     */
+    public function save( int $post_id ) {
+        if ( array_key_exists( $this->_meta_box, $_POST ) ) {
+            update_post_meta(
+                $post_id,
+                $this->_meta_box,
+                $_POST[$this->_meta_box]
+            );
+        }
+        
+    }
+ 
+ 
+    /**
+     * Display the meta box HTML to the user.
+     *
+     * @param \WP_Post $post   Post object.
+     */
+    public function html( $post ) {
+        
+        $value = get_post_meta( $post->ID, $this->_meta_box, true );
+        ?>
+
+            <label for="<?php echo $this->_meta_box; ?>">Value: </label>
+            <input name="<?php echo $this->_meta_box; ?>" id="<?php echo $this->_meta_box; ?>" class="postbox" type="text" value="<?php echo $value; ?>"/>
+            
+        <?php
+    }
+}
+
+$meta_boxes = [
+    "articul",
+    "charasteristics",
+    "description",
+    "discount",
+    "price",
+];
+
+foreach ($meta_boxes as $mb) {
+
+    $box = new Products_Meta_Box("product", $mb);
+    add_action( 'add_meta_boxes', [ $box, 'add' ] );
+    add_action( 'save_post', [ $box, 'save' ] );
+}

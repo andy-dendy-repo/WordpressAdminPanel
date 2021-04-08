@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Debug;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -8,6 +10,8 @@ namespace WordpressClient.Data
 {
     public partial class AdminDbContext : DbContext
     {
+        public static readonly LoggerFactory DbCommandDebugLoggerFactory = new LoggerFactory(new[] { new DebugLoggerProvider() });
+
         public AdminDbContext()
         {
         }
@@ -32,9 +36,11 @@ namespace WordpressClient.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseLoggerFactory(DbCommandDebugLoggerFactory);
+
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("server=localhost;port=3306;user=root;database=wordpress", x => x.ServerVersion("8.0.21-mysql"));
+                optionsBuilder.UseMySql("server=localhost;port=3306;user=root;database=wordpress;ConvertZeroDateTime=True;", x => x.ServerVersion("8.0.21-mysql"));
             }
         }
 
