@@ -12,7 +12,7 @@ namespace AdminPanel
 {
     public class ModelMappingProfile : Profile
     {
-        public ModelMappingProfile(IMetaValuesServiceBase service)
+        public ModelMappingProfile()
         {
             CreateMap<WpPosts, Product>();
             CreateMap<Product, WpPosts>();

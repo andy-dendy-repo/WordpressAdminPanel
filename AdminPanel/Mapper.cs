@@ -33,7 +33,7 @@ namespace AdminPanel
         {
             var mappingConfig = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new ModelMappingProfile(new OrdersService(new AdminDbContext())));
+                mc.AddProfile(new ModelMappingProfile());
             });
 
             _mapper = mappingConfig.CreateMapper();
