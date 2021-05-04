@@ -22,10 +22,8 @@
             <MenuItem x:Name="miLogin" Header="Login" IsCheckable="true" Click="miLogin_Click"/>
             <MenuItem Header="New window" IsCheckable="true" FontSize="16"/>
             <MenuItem x:Name="miCategories" Header="Categories" IsCheckable="true" FontSize="16" Click="miCategories_Click"/>
-            <MenuItem Header="Products" IsCheckable="true" FontSize="16"/>
-            <MenuItem Header="Discounts" IsCheckable="true" FontSize="16"/>
+            <MenuItem x:Name="miProducts" Header="Products" IsCheckable="true" FontSize="16" Click="miProducts_Click"/>
             <MenuItem Header="Orders" IsCheckable="true" FontSize="16"/>
-            <MenuItem Header="Extra" IsCheckable="true" FontSize="16"/>
             <MenuItem x:Name="miRefresh" Header="Refresh" IsCheckable="true" FontSize="16" Click="miRefresh_Click"/>
         </Menu>
         
@@ -40,20 +38,50 @@
             <ListBox x:Name="lbCategories" ItemsSource="{Binding Categories}" Grid.Row="0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <CheckBox Content="{Binding Name}" IsChecked="{Binding IsSelected ,Mode=TwoWay}"/>
+                        <CheckBox Content="{Binding Name}" IsChecked="{Binding IsSelected ,Mode=TwoWay}" Click="CheckBox_Click"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <ListBox x:Name="lbDiscounts" ItemsSource="{Binding Discounts}" Grid.Row="2">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <CheckBox Content="{Binding Amount}"/>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+
+            <GroupBox x:Name="gbStatistics" Grid.Row="2">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Label Content="AllOrdersCount:" Grid.Row="0" Grid.Column="0"/>
+                        <Label Content="{Binding AllOrdersCount}" Grid.Row="0" Grid.Column="1"/>
+
+                        <Label Content="DeletedOrdersCount:" Grid.Row="1" Grid.Column="0"/>
+                        <Label Content="{Binding DeletedOrdersCount}" Grid.Row="1" Grid.Column="1"/>
+
+                        <Label Content="AllProductsCount:" Grid.Row="2" Grid.Column="0"/>
+                        <Label Content="{Binding AllProductsCount}" Grid.Row="2" Grid.Column="1"/>
+
+                        <Label Content="DeletedProductsCount:" Grid.Row="3" Grid.Column="0"/>
+                        <Label Content="{Binding DeletedProductsCount}" Grid.Row="3" Grid.Column="1"/>
+
+                        <Label Content="LastOrderMadeDate:" Grid.Row="4" Grid.Column="0"/>
+                        <Label Content="{Binding LastOrderMadeDate}" Grid.Row="4" Grid.Column="1"/>
+
+                        <Label Content="LastProductMadeDate:" Grid.Row="5" Grid.Column="0"/>
+                        <Label Content="{Binding LastProductMadeDate}" Grid.Row="5" Grid.Column="1"/>
+                    </Grid>
+                
+            </GroupBox>
+            
             <GridSplitter HorizontalAlignment="Stretch"   
                           VerticalAlignment="Center"   
-                          Grid.Row="1" Height="4" Background="Green">
+                          Grid.Row="1" Height="4" Background="Black">
             </GridSplitter>
         </Grid>
         <!--Creating Sub-Grid in Column 2-->
@@ -75,13 +103,16 @@
                 <DataGrid.Columns >
                     <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
                     <DataGridTextColumn Binding="{Binding PostDate}" Header="PostDate"/>
-                    <DataGridTextColumn Binding="{Binding PostContent}" Header="PostContent"/>
-                    <DataGridTextColumn Binding="{Binding PostName}" Header="PostName"/>
+                    <DataGridTextColumn Binding="{Binding OrderMeta.Ids}" Header="Ids"/>
+                    <DataGridTextColumn Binding="{Binding OrderMeta.Name}" Header="Name"/>
+                    <DataGridTextColumn Binding="{Binding OrderMeta.SecondName}" Header="SecondName"/>
+                    <DataGridTextColumn Binding="{Binding OrderMeta.Phone}" Header="Phone"/>
+                    <DataGridTextColumn Binding="{Binding OrderMeta.Address}" Header="Address"/>
                 </DataGrid.Columns>
             </DataGrid>
             <GridSplitter  HorizontalAlignment="Stretch"   
                           VerticalAlignment="Center"   
-                          Grid.Row="1" Height="4" Background="Green">
+                          Grid.Row="1" Height="4" Background="Black">
             </GridSplitter>
         </Grid>
         <GridSplitter  HorizontalAlignment="Center"   

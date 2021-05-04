@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WordpressClient.Data;
+using WordpressClient.Services;
 
 namespace AdminPanel
 {
@@ -10,6 +13,8 @@ namespace AdminPanel
         private static bool _isInitialized = false;
 
         private static IMapper _mapper;
+
+        //public Iunity
 
         public static R Map<R,T>(T value)
         {
@@ -28,7 +33,7 @@ namespace AdminPanel
         {
             var mappingConfig = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new ModelMappingProfile());
+                mc.AddProfile(new ModelMappingProfile(new OrdersService(new AdminDbContext())));
             });
 
             _mapper = mappingConfig.CreateMapper();

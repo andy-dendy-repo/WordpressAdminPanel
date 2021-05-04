@@ -7,15 +7,10 @@ using WordpressClient.Services.Interfaces;
 
 namespace WordpressClient.Services
 {
-    public class GoodsService : ServiceBase<WpPosts>, IGoodsService
+    public class GoodsService : MetaValuesServiceBase, IGoodsService
     {
         public GoodsService(AdminDbContext context) : base(context)
         {
-        }
-
-        public async Task<IList<WpPostmeta>> GetMetaByProductId(ulong id)
-        {
-            return await _context.WpPostmeta.Where(x => x.PostId == id).ToListAsync();
         }
 
         public override async Task<List<WpPosts>> GetAllAsync()
@@ -33,6 +28,17 @@ namespace WordpressClient.Services
                 .Select(x => _context.WpPosts.FirstOrDefault(p => p.Id == x.ObjectId)).ToListAsync();
 
             return termRels;
+        }
+
+        public async Task AddWithMeta(WpPosts post, string articul, string charasteristics, string description, string discount, string price)
+        {
+            await Add(post);
+
+            await AddMeta(post.Id, "articul", articul);
+            await AddMeta(post.Id, "charasteristics", charasteristics);
+            await AddMeta(post.Id, "description", description);
+            await AddMeta(post.Id, "discount", discount);
+            await AddMeta(post.Id, "price", price);
         }
     }
 }

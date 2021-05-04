@@ -7,6 +7,49 @@
         mc:Ignorable="d"
         Title="Products" Height="450" Width="800">
     <Grid>
-        
+        <TabControl>
+            <TabItem Header="Products">
+                <StackPanel>
+                    <Button x:Name="btDelete" Content="Delete" VerticalAlignment="Bottom" Click="btDelete_Click" />
+                    <DataGrid x:Name="AllProductsTable" AutoGenerateColumns="False">
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
+                            <DataGridTextColumn Binding="{Binding PostDate}" Header="PostDate"/>
+                            <DataGridTextColumn Binding="{Binding PostContent}" Header="PostContent"/>
+                            <DataGridTextColumn Binding="{Binding PostName}" Header="PostName"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Add" Height="20" VerticalAlignment="Top">
+                <StackPanel Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    
+                    <Label Content="Title:" />
+                    <TextBox x:Name="prodTitle" Text="" TextWrapping="Wrap"/>
+                    
+                    <Label Content="Content:" />
+                    <TextBox x:Name="prodContent" Text="" TextWrapping="Wrap"/>
+
+                    <Label Content="Articul:" />
+                    <TextBox x:Name="prodArticul" Text="" TextWrapping="Wrap"/>
+
+                    <Label Content="Charasteristics:" />
+                    <TextBox x:Name="prodCharasteristics" Text="" TextWrapping="Wrap"/>
+
+                    <Label Content="Description:" />
+                    <TextBox x:Name="prodDescription" Text="" TextWrapping="Wrap"/>
+
+                    <Label Content="Discount:" />
+                    <TextBox x:Name="prodDiscount" Text="" TextWrapping="Wrap"/>
+
+                    <Label Content="Price:" />
+                    <TextBox x:Name="prodPrice" Text="" TextWrapping="Wrap"/>
+
+                    <Button x:Name="AddProduct" Content="Add" Click="AddProduct_Click"/>
+
+                </StackPanel>
+
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

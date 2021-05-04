@@ -21,7 +21,7 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="Add" Height="20" VerticalAlignment="Top">
-                <StackPanel Width="200" HorizontalAlignment="Left">
+                <StackPanel Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Label Content="Name:" />
                     <TextBox x:Name="catName" Text="TextBox" TextWrapping="Wrap"/>
                     <Label Content="Slug:" />

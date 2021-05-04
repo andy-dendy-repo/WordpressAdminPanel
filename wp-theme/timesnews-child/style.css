@@ -1,0 +1,18 @@
+/*
+ Theme Name:   TimesNews Child
+ Theme URI:    http://localhost.com
+ Description:  Extra functionality for products management
+ Author:       I
+ Author URI:   http://localhost.com
+ Template:     timesnews
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Tags:         light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
+ Text Domain:  timesnewschild
+*/
+details {
+	background: #009a8c;
+    color: white;
+    padding: 5px;
+}

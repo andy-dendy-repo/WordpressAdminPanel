@@ -31,6 +31,8 @@ namespace AdminPanel
 
             container.RegisterType<ICategoryService, CategoryService>();
 
+            container.RegisterType<IOrdersService, OrdersService>();
+
             return container;
         }
     }

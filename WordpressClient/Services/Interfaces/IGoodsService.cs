@@ -6,10 +6,10 @@ using WordpressClient.Data;
 
 namespace WordpressClient.Services.Interfaces
 {
-    public interface IGoodsService : IServiceBase<WpPosts>
+    public interface IGoodsService : IMetaValuesServiceBase
     {
-        Task<IList<WpPostmeta>> GetMetaByProductId(ulong id);
-
         Task<IList<WpPosts>> GetProductsFilteredByCategoryIds(IList<ulong> ids = null);
+
+        Task AddWithMeta(WpPosts post, string articul, string charasteristics, string description, string discount, string price);
     }
 }
