@@ -15,5 +15,7 @@ namespace AdminPanel.Models
         public string PostStatus { get; set; }
         public string PostName { get; set; }
         public DateTime PostModified { get; set; }
+
+        public ProductMeta ProductMeta { get; set; }
     }
 }

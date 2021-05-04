@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdminPanel"
         mc:Ignorable="d"
-        Title="Products" Height="450" Width="800">
+        Title="Products" Height="532" Width="800">
     <Grid>
         <TabControl>
             <TabItem Header="Products">
@@ -17,6 +17,13 @@
                             <DataGridTextColumn Binding="{Binding PostDate}" Header="PostDate"/>
                             <DataGridTextColumn Binding="{Binding PostContent}" Header="PostContent"/>
                             <DataGridTextColumn Binding="{Binding PostName}" Header="PostName"/>
+                            <DataGridTemplateColumn Header="Categories">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ListBox ItemsSource="{Binding ProductMeta.Categories}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
@@ -45,6 +52,15 @@
                     <Label Content="Price:" />
                     <TextBox x:Name="prodPrice" Text="" TextWrapping="Wrap"/>
 
+                    <Label Content="Category:" />
+                    <ListBox x:Name="lbCategories" ItemsSource="{Binding Categories}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding Name}" IsChecked="{Binding IsSelected ,Mode=TwoWay}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    
                     <Button x:Name="AddProduct" Content="Add" Click="AddProduct_Click"/>
 
                 </StackPanel>
