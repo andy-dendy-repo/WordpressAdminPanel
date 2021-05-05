@@ -3,6 +3,22 @@ jQuery(document).ready(function(){
 
   Choise();
 
+  
+    jQuery(".filter-form button").click(function(){
+
+      var cat = document.getElementsByName("cat")[0].value;
+      var has_discount = document.getElementsByName("has_discount")[0].checked;
+      var lprice = document.getElementsByName("lprice")[0].value;
+      var uprice = document.getElementsByName("uprice")[0].value;
+
+      setCookie("cat", cat, 1);
+      setCookie("has_discount", has_discount, 1);
+      setCookie("lprice", lprice, 1);
+      setCookie("uprice", uprice, 1);
+      location.reload();
+
+    });
+
     jQuery(".order-now").click(function(){
 
       var name = document.getElementById("name").value;

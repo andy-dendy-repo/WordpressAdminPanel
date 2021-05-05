@@ -20,8 +20,8 @@ $sticky_text = get_theme_mod ('sticky_text',esc_html__('Featured','timesnews'));
 $articul = get_post_meta( get_the_ID(), 'articul', true );
 $charasteristics = get_post_meta( get_the_ID(), 'charasteristics', true );
 $description = get_post_meta( get_the_ID(), 'description', true );
-$discount = get_post_meta( get_the_ID(), 'articul', true );
-$price = get_post_meta( get_the_ID(), 'articul', true );
+$discount = get_post_meta( get_the_ID(), 'discount', true );
+$price = get_post_meta( get_the_ID(), 'price', true );
 ?>
 <article id="post-<?php the_ID(); ?>" class="page status-publish has-post-thumbnail hentry entry">
 	<?php 

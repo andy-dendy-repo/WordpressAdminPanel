@@ -19,7 +19,7 @@ $categories = get_categories( array(
 ) );
 
 get_header();
-//var_dump($_COOKIE['products']);
+
 $args = array(
     'post_type' => array( 'product' ),
     'orderby' => 'ASC',
