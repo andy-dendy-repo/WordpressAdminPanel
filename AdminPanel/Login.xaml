@@ -8,11 +8,11 @@
         Title="Login" Width="170" Height="177">
     <Grid>
         <StackPanel>
-            <Label Content="Username:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="95"/>
+            <Label Content="Логін:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="95"/>
             <TextBox x:Name="tbUsename" HorizontalAlignment="Left" Text="root" TextWrapping="Wrap" VerticalAlignment="Top" Width="169"/>
-            <Label Content="Password:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="95"/>
+            <Label Content="Пароль:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="95"/>
             <TextBox x:Name="tbPassword" HorizontalAlignment="Left" Text="1111" TextWrapping="Wrap" VerticalAlignment="Top" Width="169"/>
-            <Button x:Name="btnLogin" Content="Login" Margin="10" Height="29" Width="98" Click="btnLogin_Click"/>
+            <Button x:Name="btnLogin" Content="Увійти" Margin="10" Height="29" Width="98" Click="btnLogin_Click"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -10,14 +10,14 @@
         <TabControl>
             <TabItem Header="Products">
                 <StackPanel>
-                    <Button x:Name="btDelete" Content="Delete" VerticalAlignment="Bottom" Click="btDelete_Click" />
+                    <Button x:Name="btDelete" Content="Видалити" VerticalAlignment="Bottom" Click="btDelete_Click" />
                     <DataGrid x:Name="AllProductsTable" AutoGenerateColumns="False">
                         <DataGrid.Columns >
-                            <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
-                            <DataGridTextColumn Binding="{Binding PostDate}" Header="PostDate"/>
-                            <DataGridTextColumn Binding="{Binding PostContent}" Header="PostContent"/>
-                            <DataGridTextColumn Binding="{Binding PostName}" Header="PostName"/>
-                            <DataGridTemplateColumn Header="Categories">
+                            <DataGridTextColumn Binding="{Binding Id}" Header="ІД" />
+                            <DataGridTextColumn Binding="{Binding PostDate}" Header="Дата створення"/>
+                            <DataGridTextColumn Binding="{Binding PostContent}" Header="Контент"/>
+                            <DataGridTextColumn Binding="{Binding PostName}" Header="Назва"/>
+                            <DataGridTemplateColumn Header="категорії">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <ListBox ItemsSource="{Binding ProductMeta.Categories}" />
@@ -31,28 +31,28 @@
             <TabItem Header="Add" Height="20" VerticalAlignment="Top">
                 <StackPanel Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
                     
-                    <Label Content="Title:" />
+                    <Label Content="Назва:" />
                     <TextBox x:Name="prodTitle" Text="" TextWrapping="Wrap"/>
                     
-                    <Label Content="Content:" />
+                    <Label Content="Контент:" />
                     <TextBox x:Name="prodContent" Text="" TextWrapping="Wrap"/>
 
-                    <Label Content="Articul:" />
+                    <Label Content="Артікул:" />
                     <TextBox x:Name="prodArticul" Text="" TextWrapping="Wrap"/>
 
-                    <Label Content="Charasteristics:" />
+                    <Label Content="Характеристики:" />
                     <TextBox x:Name="prodCharasteristics" Text="" TextWrapping="Wrap"/>
 
-                    <Label Content="Description:" />
+                    <Label Content="Опис:" />
                     <TextBox x:Name="prodDescription" Text="" TextWrapping="Wrap"/>
 
-                    <Label Content="Discount:" />
+                    <Label Content="Знижка:" />
                     <TextBox x:Name="prodDiscount" Text="" TextWrapping="Wrap"/>
 
-                    <Label Content="Price:" />
+                    <Label Content="Ціна:" />
                     <TextBox x:Name="prodPrice" Text="" TextWrapping="Wrap"/>
 
-                    <Label Content="Category:" />
+                    <Label Content="Категорія:" />
                     <ListBox x:Name="lbCategories" ItemsSource="{Binding Categories}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -61,7 +61,7 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                     
-                    <Button x:Name="AddProduct" Content="Add" Click="AddProduct_Click"/>
+                    <Button x:Name="AddProduct" Content="Додати" Click="AddProduct_Click"/>
 
                 </StackPanel>
 

@@ -8,25 +8,25 @@
         Title="Categories" Height="450" Width="800">
     <Grid>
         <TabControl>
-            <TabItem Header="Categories">
+            <TabItem Header="Категорії">
                 <StackPanel>
-                    <Button x:Name="btDelete" Content="Delete" VerticalAlignment="Bottom" Click="btDelete_Click" />
+                    <Button x:Name="btDelete" Content="Видалити" VerticalAlignment="Bottom" Click="btDelete_Click" />
                     <DataGrid x:Name="AllCategoriesTable" AutoGenerateColumns="False">
                         <DataGrid.Columns >
-                            <DataGridTextColumn Binding="{Binding TermId}" Header="TermId" />
-                            <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
-                            <DataGridTextColumn Binding="{Binding Slug}" Header="Slug"/>
+                            <DataGridTextColumn Binding="{Binding TermId}" Header="ІД" />
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Назва"/>
+                            <DataGridTextColumn Binding="{Binding Slug}" Header="Урл домен"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Add" Height="20" VerticalAlignment="Top">
                 <StackPanel Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Label Content="Name:" />
-                    <TextBox x:Name="catName" Text="TextBox" TextWrapping="Wrap"/>
-                    <Label Content="Slug:" />
-                    <TextBox x:Name="catSlug" Text="TextBox" TextWrapping="Wrap"/>
-                    <Button x:Name="AddCategory" Content="Add" Click="AddCategory_Click"/>
+                    <Label Content="Назва:" />
+                    <TextBox x:Name="catName" Text="" TextWrapping="Wrap"/>
+                    <Label Content="Урл домен:" />
+                    <TextBox x:Name="catSlug" Text="" TextWrapping="Wrap"/>
+                    <Button x:Name="AddCategory" Content="Додати" Click="AddCategory_Click"/>
                     
 
                 </StackPanel>

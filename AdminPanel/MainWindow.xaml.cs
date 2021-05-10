@@ -54,7 +54,10 @@ namespace AdminPanel
 
                 goods = Mapper.Map<IList<Product>, IList<WpPosts>>(await _goodsService.GetProductsFilteredByCategoryIds(ids));
 
-                AllGoodsTable.ItemsSource = goods;
+                if (goods.FirstOrDefault() != null)
+                    AllGoodsTable.ItemsSource = goods;
+                else
+                    AllGoodsTable.ItemsSource = null;
             }
             else
             {

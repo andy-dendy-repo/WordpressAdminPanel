@@ -19,12 +19,11 @@
         </Grid.RowDefinitions>
 
         <Menu Grid.ColumnSpan="3" Height="38" Name="menu1" VerticalAlignment="Stretch" BorderThickness="2" FontSize="16" FontWeight="Bold">
-            <MenuItem x:Name="miLogin" Header="Login" IsCheckable="true" Click="miLogin_Click"/>
-            <MenuItem Header="New window" IsCheckable="true" FontSize="16"/>
-            <MenuItem x:Name="miCategories" Header="Categories" IsCheckable="true" FontSize="16" Click="miCategories_Click"/>
-            <MenuItem x:Name="miProducts" Header="Products" IsCheckable="true" FontSize="16" Click="miProducts_Click"/>
-            <MenuItem Header="Orders" IsCheckable="true" FontSize="16"/>
-            <MenuItem x:Name="miRefresh" Header="Refresh" IsCheckable="true" FontSize="16" Click="miRefresh_Click"/>
+            <MenuItem x:Name="miLogin" Header="Логінізація" IsCheckable="true" Click="miLogin_Click"/>
+            <MenuItem x:Name="miCategories" Header="Категорії" IsCheckable="true" FontSize="16" Click="miCategories_Click"/>
+            <MenuItem x:Name="miProducts" Header="Продукти" IsCheckable="true" FontSize="16" Click="miProducts_Click"/>
+            <MenuItem Header="Замовлення" IsCheckable="true" FontSize="16"/>
+            <MenuItem x:Name="miRefresh" Header="Оновити" IsCheckable="true" FontSize="16" Click="miRefresh_Click"/>
         </Menu>
         
         <!--Creating Sub-Grid in Column 0-->
@@ -58,22 +57,22 @@
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Label Content="AllOrdersCount:" Grid.Row="0" Grid.Column="0"/>
+                        <Label Content="Кількість заказів:" Grid.Row="0" Grid.Column="0"/>
                         <Label Content="{Binding AllOrdersCount}" Grid.Row="0" Grid.Column="1"/>
 
-                        <Label Content="DeletedOrdersCount:" Grid.Row="1" Grid.Column="0"/>
+                        <Label Content="Видалені закази:" Grid.Row="1" Grid.Column="0"/>
                         <Label Content="{Binding DeletedOrdersCount}" Grid.Row="1" Grid.Column="1"/>
 
-                        <Label Content="AllProductsCount:" Grid.Row="2" Grid.Column="0"/>
+                        <Label Content="Кількість продуктів:" Grid.Row="2" Grid.Column="0"/>
                         <Label Content="{Binding AllProductsCount}" Grid.Row="2" Grid.Column="1"/>
 
-                        <Label Content="DeletedProductsCount:" Grid.Row="3" Grid.Column="0"/>
+                        <Label Content="Видалені продукти:" Grid.Row="3" Grid.Column="0"/>
                         <Label Content="{Binding DeletedProductsCount}" Grid.Row="3" Grid.Column="1"/>
 
-                        <Label Content="LastOrderMadeDate:" Grid.Row="4" Grid.Column="0"/>
+                        <Label Content="Дата останнього заказу:" Grid.Row="4" Grid.Column="0"/>
                         <Label Content="{Binding LastOrderMadeDate}" Grid.Row="4" Grid.Column="1"/>
 
-                        <Label Content="LastProductMadeDate:" Grid.Row="5" Grid.Column="0"/>
+                        <Label Content="Дата створення ост. заказу:" Grid.Row="5" Grid.Column="0"/>
                         <Label Content="{Binding LastProductMadeDate}" Grid.Row="5" Grid.Column="1"/>
                     </Grid>
                 
@@ -93,21 +92,21 @@
             </Grid.RowDefinitions>
             <DataGrid x:Name="AllGoodsTable" AutoGenerateColumns="False" Grid.Row="0">
                 <DataGrid.Columns >
-                    <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
-                    <DataGridTextColumn Binding="{Binding PostDate}" Header="PostDate"/>
-                    <DataGridTextColumn Binding="{Binding PostContent}" Header="PostContent"/>
-                    <DataGridTextColumn Binding="{Binding PostName}" Header="PostName"/>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="ІД" />
+                    <DataGridTextColumn Binding="{Binding PostDate}" Header="Дата створення"/>
+                    <DataGridTextColumn Binding="{Binding PostContent}" Header="Контент"/>
+                    <DataGridTextColumn Binding="{Binding PostName}" Header="Назва"/>
                 </DataGrid.Columns>
             </DataGrid>
             <DataGrid x:Name="AllOrdersTable" AutoGenerateColumns="False" Grid.Row="2">
                 <DataGrid.Columns >
-                    <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
-                    <DataGridTextColumn Binding="{Binding PostDate}" Header="PostDate"/>
-                    <DataGridTextColumn Binding="{Binding OrderMeta.Ids}" Header="Ids"/>
-                    <DataGridTextColumn Binding="{Binding OrderMeta.Name}" Header="Name"/>
-                    <DataGridTextColumn Binding="{Binding OrderMeta.SecondName}" Header="SecondName"/>
-                    <DataGridTextColumn Binding="{Binding OrderMeta.Phone}" Header="Phone"/>
-                    <DataGridTextColumn Binding="{Binding OrderMeta.Address}" Header="Address"/>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="ІД" />
+                    <DataGridTextColumn Binding="{Binding PostDate}" Header="Дата створення"/>
+                    <DataGridTextColumn Binding="{Binding OrderMeta.Ids}" Header="список ІД"/>
+                    <DataGridTextColumn Binding="{Binding OrderMeta.Name}" Header="Ім'я"/>
+                    <DataGridTextColumn Binding="{Binding OrderMeta.SecondName}" Header="Призвище"/>
+                    <DataGridTextColumn Binding="{Binding OrderMeta.Phone}" Header="Телефон"/>
+                    <DataGridTextColumn Binding="{Binding OrderMeta.Address}" Header="Адреса"/>
                 </DataGrid.Columns>
             </DataGrid>
             <GridSplitter  HorizontalAlignment="Stretch"   
