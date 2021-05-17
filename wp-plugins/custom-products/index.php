@@ -49,7 +49,7 @@ function wp_products_init() {
         'publicly_queryable' => true,
         'show_ui'            => true,
         'show_in_menu'       => true,
-        //'query_var'          => true,
+        'taxonomies'  => array( 'category' ),
         'rewrite'            => array( 'slug' => 'products' ),
         'capability_type'    => 'post',
         'has_archive'        => true,
@@ -83,7 +83,9 @@ class Products_Meta_Box {
             $this->_meta_box,          // Unique ID
             $this->_meta_box, // Box title
             [ $this, 'html' ],   // Content callback, must be of type callable
-            $this->_post_type                  // Post type
+            $this->_post_type,                  // Post type
+            'normal', 
+            'high'
         );
     }
  
@@ -111,8 +113,9 @@ class Products_Meta_Box {
      * @param \WP_Post $post   Post object.
      */
     public function html( $post ) {
-        
+
         $value = get_post_meta( $post->ID, $this->_meta_box, true );
+
         ?>
 
             <label for="<?php echo $this->_meta_box; ?>">Value: </label>
