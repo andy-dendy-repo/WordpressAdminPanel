@@ -12,7 +12,7 @@ namespace WordpressClient.Services.Interfaces
 
         Task<List<T>> GetAllAsync();
 
-        Task<T> GetByIdAsync(ulong id);
+        T GetByIdAsync(ulong id);
 
         Task Add(T entity);
 

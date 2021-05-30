@@ -39,9 +39,9 @@ namespace WordpressClient.Services
             return await _entities.ToListAsync();
         }
 
-        public virtual async Task<T> GetByIdAsync(ulong id)
+        public virtual T GetByIdAsync(ulong id)
         {
-            return await _entities.FirstOrDefaultAsync(entity => GetKey(entity) == id);
+            return _entities.AsEnumerable().FirstOrDefault(entity => GetKey(entity) == id);
         }
 
         public virtual async Task Add(T entity)

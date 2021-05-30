@@ -16,19 +16,15 @@ namespace AdminPanel
     public partial class MainWindow : Window
     {
         IUnityContainer _container;
-        IGoodsService _goodsService;
+        ServicesForWindow _servicesForWindow;
         ICategoryService _categoryService;
-        IOrdersService _ordersService;
-
         IList<Category> _categories;
         public MainWindow(IUnityContainer container)
         {
             InitializeComponent();
             _container = container;
-            _goodsService = _container.Resolve<IGoodsService>();
             _categoryService = _container.Resolve<ICategoryService>();
-            _ordersService = _container.Resolve<IOrdersService>();
-
+            _servicesForWindow = new ServicesForWindow(_container.Resolve<IOrdersService>(),_container.Resolve<IGoodsService>());
             MainGrid.IsEnabled = false;
 
             var result = _container.Resolve<Login>().ShowDialog();
@@ -52,18 +48,18 @@ namespace AdminPanel
             {
                 var ids = _categories.Where(x => x.IsSelected == true).Select(x => x.TermId).ToList();
 
-                goods = Mapper.Map<IList<Product>, IList<WpPosts>>(await _goodsService.GetProductsFilteredByCategoryIds(ids));
+                goods = Mapper.Map<IList<Product>, IList<WpPosts>>(await _servicesForWindow.GoodsService.GetProductsFilteredByCategoryIds(ids));
 
                 if (goods.FirstOrDefault() != null)
-                    AllGoodsTable.ItemsSource = goods;
+                    AllGoodsTable.ItemsSource = goods.Where(x=>x!=null);
                 else
                     AllGoodsTable.ItemsSource = null;
             }
             else
             {
-                goods = Mapper.Map<IList<Product>, IList<WpPosts>>(await _goodsService.GetAllAsync());
+                goods = Mapper.Map<IList<Product>, IList<WpPosts>>(await _servicesForWindow.GoodsService.GetAllAsync());
 
-                AllGoodsTable.ItemsSource = goods;
+                AllGoodsTable.ItemsSource = goods.Where(x => x != null);
             }
 
             return goods;
@@ -77,45 +73,26 @@ namespace AdminPanel
 
             lbCategories.ItemsSource = _categories;
 
-            var orders = Mapper.Map<IList<Order>, IList<WpPosts>>(await _ordersService.GetAllAsync());
-
-            foreach(var order in orders)
-            {
-                order.OrderMeta = await GetOrderMeta(order.Id);
-            }
+            var orders = await _servicesForWindow.GetOrders();
 
             AllOrdersTable.ItemsSource = orders;
 
-            Statistics statistics = new Statistics()
+            try
             {
-                AllOrdersCount = orders.Count,
-                AllProductsCount = goods.Count,
-                LastOrderMadeDate = orders.Max(x=>x.PostDate),
-                LastProductMadeDate = goods.Max(x => x.PostDate),
-                DeletedProductsCount = goods.Count(x=>x.PostStatus== "publish"),
-                DeletedOrdersCount = orders.Count(x => x.PostStatus == "publish"),
-            };
 
-            gbStatistics.DataContext = statistics;
-        }
+                Statistics statistics = new Statistics()
+                {
+                    AllOrdersCount = orders.Count,
+                    AllProductsCount = goods.Count,
+                    LastOrderMadeDate = orders.Max(x => x.PostDate),
+                    LastProductMadeDate = goods.Max(x => x.PostDate),
+                    DeletedProductsCount = goods.Count(x => x.PostStatus == "publish"),
+                    DeletedOrdersCount = orders.Count(x => x.PostStatus == "publish"),
+                };
 
-        private async Task<OrderMeta> GetOrderMeta(ulong id)
-        {
-            var list = await _ordersService.GetMetaByPostId(id);
-
-            OrderMeta orderMeta = null;
-
-            if (list.Count != 0)
-            {
-                orderMeta = new OrderMeta();
-                orderMeta.Ids = list.FirstOrDefault(x => x.MetaKey == "ids")?.MetaValue;
-                orderMeta.Name = list.FirstOrDefault(x => x.MetaKey == "name")?.MetaValue;
-                orderMeta.SecondName = list.FirstOrDefault(x => x.MetaKey == "second_name")?.MetaValue;
-                orderMeta.Phone = list.FirstOrDefault(x => x.MetaKey == "phone")?.MetaValue;
-                orderMeta.Address = list.FirstOrDefault(x => x.MetaKey == "address")?.MetaValue;
+                gbStatistics.DataContext = statistics;
             }
-
-            return orderMeta;
+            catch { }
         }
 
         private void miCategories_Click(object sender, RoutedEventArgs e)
@@ -147,6 +124,11 @@ namespace AdminPanel
         private async void CheckBox_Click(object sender, RoutedEventArgs e)
         {
             _ = await FilterByCategories();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            _container.Resolve<Orders>().Show();
         }
     }
 }

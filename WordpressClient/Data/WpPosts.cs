@@ -11,7 +11,7 @@ namespace WordpressClient.Data
     {
         public ulong Id { get; set; }
         public ulong PostAuthor { get; set; }
-        public DateTime PostDate { get; set; }
+        public DateTime PostDate { get; set; } = DateTime.Now;
         public DateTime PostDateGmt { get; set; }
         public string PostContent { get; set; }
         public string PostTitle { get; set; }

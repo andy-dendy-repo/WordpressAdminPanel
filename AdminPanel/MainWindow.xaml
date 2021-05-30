@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdminPanel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="460" Width="943">
     <Grid x:Name="MainGrid">
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -22,10 +22,10 @@
             <MenuItem x:Name="miLogin" Header="Логінізація" IsCheckable="true" Click="miLogin_Click"/>
             <MenuItem x:Name="miCategories" Header="Категорії" IsCheckable="true" FontSize="16" Click="miCategories_Click"/>
             <MenuItem x:Name="miProducts" Header="Продукти" IsCheckable="true" FontSize="16" Click="miProducts_Click"/>
-            <MenuItem Header="Замовлення" IsCheckable="true" FontSize="16"/>
+            <MenuItem Header="Замовлення" IsCheckable="true" FontSize="16" Click="MenuItem_Click"/>
             <MenuItem x:Name="miRefresh" Header="Оновити" IsCheckable="true" FontSize="16" Click="miRefresh_Click"/>
         </Menu>
-        
+
         <!--Creating Sub-Grid in Column 0-->
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.RowDefinitions>
@@ -44,40 +44,40 @@
 
             <GroupBox x:Name="gbStatistics" Grid.Row="2">
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Label Content="Кількість заказів:" Grid.Row="0" Grid.Column="0"/>
-                        <Label Content="{Binding AllOrdersCount}" Grid.Row="0" Grid.Column="1"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Content="Кількість заказів:" Grid.Row="0" Grid.Column="0"/>
+                    <Label Content="{Binding AllOrdersCount}" Grid.Row="0" Grid.Column="1"/>
 
-                        <Label Content="Видалені закази:" Grid.Row="1" Grid.Column="0"/>
-                        <Label Content="{Binding DeletedOrdersCount}" Grid.Row="1" Grid.Column="1"/>
+                    <Label Content="Видалені закази:" Grid.Row="1" Grid.Column="0"/>
+                    <Label Content="{Binding DeletedOrdersCount}" Grid.Row="1" Grid.Column="1"/>
 
-                        <Label Content="Кількість продуктів:" Grid.Row="2" Grid.Column="0"/>
-                        <Label Content="{Binding AllProductsCount}" Grid.Row="2" Grid.Column="1"/>
+                    <Label Content="Кількість продуктів:" Grid.Row="2" Grid.Column="0"/>
+                    <Label Content="{Binding AllProductsCount}" Grid.Row="2" Grid.Column="1"/>
 
-                        <Label Content="Видалені продукти:" Grid.Row="3" Grid.Column="0"/>
-                        <Label Content="{Binding DeletedProductsCount}" Grid.Row="3" Grid.Column="1"/>
+                    <Label Content="Видалені продукти:" Grid.Row="3" Grid.Column="0"/>
+                    <Label Content="{Binding DeletedProductsCount}" Grid.Row="3" Grid.Column="1"/>
 
-                        <Label Content="Дата останнього заказу:" Grid.Row="4" Grid.Column="0"/>
-                        <Label Content="{Binding LastOrderMadeDate}" Grid.Row="4" Grid.Column="1"/>
+                    <Label Content="Дата останнього заказу:" Grid.Row="4" Grid.Column="0"/>
+                    <Label Content="{Binding LastOrderMadeDate}" Grid.Row="4" Grid.Column="1"/>
 
-                        <Label Content="Дата створення ост. заказу:" Grid.Row="5" Grid.Column="0"/>
-                        <Label Content="{Binding LastProductMadeDate}" Grid.Row="5" Grid.Column="1"/>
-                    </Grid>
-                
+                    <Label Content="Дата створення ост. заказу:" Grid.Row="5" Grid.Column="0"/>
+                    <Label Content="{Binding LastProductMadeDate}" Grid.Row="5" Grid.Column="1"/>
+                </Grid>
+
             </GroupBox>
-            
+
             <GridSplitter HorizontalAlignment="Stretch"   
                           VerticalAlignment="Center"   
                           Grid.Row="1" Height="4" Background="Black">
@@ -107,6 +107,13 @@
                     <DataGridTextColumn Binding="{Binding OrderMeta.SecondName}" Header="Призвище"/>
                     <DataGridTextColumn Binding="{Binding OrderMeta.Phone}" Header="Телефон"/>
                     <DataGridTextColumn Binding="{Binding OrderMeta.Address}" Header="Адреса"/>
+                    <DataGridTemplateColumn Header="Продукти">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate >
+                                <ListBox ItemsSource="{Binding OrderMeta.Products}"></ListBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <GridSplitter  HorizontalAlignment="Stretch"   

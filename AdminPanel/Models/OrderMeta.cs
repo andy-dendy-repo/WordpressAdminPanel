@@ -15,5 +15,7 @@ namespace AdminPanel.Models
         public string Phone { get; set; }
 
         public string Address { get; set; }
+
+        public IList<OrderedProduct> Products { get; set; } = new List<OrderedProduct>();
     }
 }

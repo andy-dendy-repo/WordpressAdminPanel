@@ -1,0 +1,34 @@
+﻿<Window x:Class="AdminPanel.Orders"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdminPanel"
+        mc:Ignorable="d"
+        Title="Orders" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button x:Name="btDelete" Content="Видалити" VerticalAlignment="Bottom" Click="btDelete_Click"/>
+        <DataGrid x:Name="AllOrdersTable" AutoGenerateColumns="False" Grid.Row="2">
+            <DataGrid.Columns >
+                <DataGridTextColumn Binding="{Binding Id}" Header="ІД" />
+                <DataGridTextColumn Binding="{Binding PostDate}" Header="Дата створення"/>
+                <DataGridTextColumn Binding="{Binding OrderMeta.Ids}" Header="список ІД"/>
+                <DataGridTextColumn Binding="{Binding OrderMeta.Name}" Header="Ім'я"/>
+                <DataGridTextColumn Binding="{Binding OrderMeta.SecondName}" Header="Призвище"/>
+                <DataGridTextColumn Binding="{Binding OrderMeta.Phone}" Header="Телефон"/>
+                <DataGridTextColumn Binding="{Binding OrderMeta.Address}" Header="Адреса"/>
+                <DataGridTemplateColumn Header="Продукти">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate >
+                            <ListBox ItemsSource="{Binding OrderMeta.Products}"></ListBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
